@@ -18,6 +18,10 @@ class PC_Model extends Model{
 	private double supplyIntercept;
 	private double optimal_Price;
 	private double optimal_Quantity;
+	private double welfare;				//W = cs + ps
+	private double cs;					//consumer surplus
+	private double ps;					//producerSurplus
+	private double dwl;					//dead weight loss
 
 	//private data fields for supply and demand series
 	private XYSeries demandSeries = new XYSeries("Demand");
@@ -30,7 +34,7 @@ class PC_Model extends Model{
 	public PC_Model(){
 	}
 
-	//constructor that takes demand and supply slope and intercept
+	//This constructor that takes demand and supply slope and intercept
 	public PC_Model(double supplySlope, double supplyIntercept, double demandSlope, double demandIntercept){
 		
 		//Pass the method args. to the object data fields
@@ -61,32 +65,82 @@ class PC_Model extends Model{
 		return optimal_Quantity = ((demandIntercept - Math.abs(supplyIntercept)) / (demandSlope + supplySlope));
 	}
 	
-	//createDemandSeries: Populates the Demand series for this model object
-	public XYSeries createDemandSeries(){
-		XYSeries demandSeries = new XYSeries("Demand");
-		for(double p = demandIntercept; p > 0; p--){
-			double q = (demandIntercept - p)/demandSlope;
-			demandSeries.add(q,p);
-		}
-		return demandSeries;
+	/**Method: CalcCS
+	 * Formula: 
+	 * Input: null
+	 * Output: double
+	 * Purpose:Calculates the consumer surplus for the Perfectly Competitive data model
+	 **/
+	public double calcCS(){
+		return cs = 0.5*(demandIntercept - optimal_Price)*optimal_Quantity;
 	}
 
-	//createSupplySeries: Populates the supply series for this model object
-	public XYSeries createSupplySeries(){
-		
-		//create temp vars
-		XYSeries supplySeries = new XYSeries("Supply");
-		double q = 0, p = 0;
-		
-		while((q <= (1.02*optimal_Quantity)) || (p<=(1.02*optimal_Price))){
-			p = supplyIntercept + (supplySlope * q);
-			supplySeries.add(q,p);
-			q++;
+	/**Method: CalcPS
+	 * Formula:
+	 * Input: null
+	 * Output: double
+	 * Purpose: Calculates the producer surplus for the Perfectly Competitive data model
+	 **/
+	public double calcPS(){
+		return ps = 0.5*(optimal_Price - supplyIntercept)*optimal_Quantity;
+	}	
+
+	/**Method: CalcW
+	 * Formula:
+	 * Input: null
+	 * Output: double
+	 * Purpose: Calculates the wellfare for the Perfectly Competitive data model
+	 * TODO: finish this method and debug
+	 **/
+	public double calcW(){
+		return welfare = cs + ps;
+	}	
+
+	/**Method: CalcDWL
+	 * Formula:
+	 * Input: null
+	 * Output: double
+	 * Purpose: Calculates the dead weight loss for the Perfectly Competitive data model
+
+	 **/
+	public double calcDWL(){
+		return dwl = 0.5*(optimal_Price - supplyIntercept)*optimal_Quantity;
+	}	
+	
+	
+	
+	
+	//createDemandSeries: Populates the Demand series for this model object
+	public XYSeries createDemandSeries(){
+		if(this.demandSeries.isEmpty() == false){
+			System.out.println("DemandSeries is !empty, it will be cleared");
+			this.demandSeries.clear();
 		}
-		return supplySeries;
+		for(double p = this.demandIntercept; p > 0; p--){
+			double q = (this.demandIntercept - p)/this.demandSlope;
+			this.demandSeries.add(q,p);
+		}
+		return this.demandSeries;
 	}
 	
-	/**createDataSet: creates a dataset for the supply and demand series for this model object.
+	//createSupplySeries: Populates the supply series for this model object
+	public XYSeries createSupplySeries(){
+
+		//create temp vars
+		double q = 0, p = 0;
+		
+		if(this.supplySeries.isEmpty() == false){
+			System.out.println("SupplySeries is !empty, it will be cleared");	
+		}
+		while((q <= (1.02*this.optimal_Quantity)) || (p<=(1.02*this.optimal_Price))){
+			p = this.supplyIntercept + (this.supplySlope * q);
+			this.supplySeries.add(q,p);
+			q++;
+		}
+		return this.supplySeries;
+	}
+	
+	/**createDataSet: Creates a dataset for the supply and demand series for this model object.
 	 * TODO Consideration: perhaps remove this method later as you may want to create an ArrayList of
 	 * PC_Model objects and add all their S & D curves to one data set, instead of trying to manage 
 	 * multiple dataset's on same graph.*/
@@ -110,7 +164,7 @@ class PC_Model extends Model{
 		return dataset;
 	}
 
-	//Getters and Setters
+	//	---	Getters and Setters	---
 	public XYDataset getDataset() {
 		return dataset;
 	}

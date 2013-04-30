@@ -1,7 +1,18 @@
-/**Top level class for all models*/
+/**Top level generic class that will be super to all other model classes.
+ * Allows for polymorphism between objects*/
 
 package econ;
 public class Model {
-	public static void main(String[] args) {
+	
+	//	---	COnstructors	---
+	
+	/*Default no arg constructor*/
+	public Model(){
 	}
+
+	//	---	Methods	---
+	
+	
+	//	---	Getters and setters	--
+	
 }
