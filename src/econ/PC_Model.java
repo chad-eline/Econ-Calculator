@@ -9,7 +9,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 /**This is the clean version of the Perfect Competition data model.
 TODO: add methods to handle the creation of the datasets and the series*/
 
-class PC_Model{
+class PC_Model extends Model{
 
 	//private data fields for price and quantity
 	private double demandSlope;

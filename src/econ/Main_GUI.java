@@ -24,7 +24,6 @@ public class Main_GUI extends JFrame{
 	
 	/**Default frame title*/
 	public static final String DEFAULT_FRAME_TITLE = "My Econ Tutor";
-
 	
 	private String[] modelNames = {"Please Select a Model", "Bertrand", "Cournot", "Monopoly", "Perfect Competition", "Stackelburg"};
 	private JComboBox modelList = new JComboBox(modelNames);
@@ -63,7 +62,7 @@ public class Main_GUI extends JFrame{
 			}
 		}
 	}
-	
+
 	public static void main(String[] args){
 		/**For Testing. 
 		 * TODO: Remove and finalize this code.*/

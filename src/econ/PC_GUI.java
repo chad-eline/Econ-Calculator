@@ -112,6 +112,13 @@ public class PC_GUI extends JPanel{
 		//create new solve button listener and register it
 		SolveButtonListener sBListener = new SolveButtonListener(); 
 		jbtSolve.addActionListener(sBListener);
+
+		//add text fields to event listener so user can use enter key to submit values
+		jtfDemandIntercept.addActionListener(sBListener);
+		jtfDemandSlope.addActionListener(sBListener);
+		jtfSupplyIntercept.addActionListener(sBListener);
+		jtfSupplySlope.addActionListener(sBListener);
+
 	}
 	// ----- CONSTRUCTORS END -----
 	
@@ -119,11 +126,10 @@ public class PC_GUI extends JPanel{
 	// ----- LISTENERS -----
 	class SolveButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			/**Checks if all the necessary fields are filled and then calculates the outcomes for
-			 * perfect competition and then displays them!*/
 
-			/*TODO: add try catch block around these doubles in case they were null*/ 
-			//Grab the double values from the text boxes
+			/*TODO: Add a try/catch block around these doubles to check if they're null*/ 
+
+			//Parse the double values from the text boxes
 			double SSlope = Double.parseDouble(jtfSupplySlope.getText());
 			double SIntercept = Double.parseDouble(jtfSupplyIntercept.getText());
 			double DSlope = Double.parseDouble(jtfDemandSlope.getText());
@@ -133,11 +139,10 @@ public class PC_GUI extends JPanel{
 			/**Want to update the series within the pc_model if TRUE, 
 			 * and just run the constructor if false*/
 
-			//TODO: fix this if condition, wit should check for null values
+			//TODO: fix this if condition, which should check for null values
 //			if((SSlope = null) && (SIntercept = null) && (DSlope = null) && (DIntercept = null)){
 
 				if(isModelCreated){
-					
 					//update the slope and intercept for the model
 					pc_model.setSupplySlope(SSlope);
 					pc_model.setSupplyIntercept(SIntercept);
@@ -156,6 +161,7 @@ public class PC_GUI extends JPanel{
 					//then recalculate the series'
 					pc_model.setSupplySeries(pc_model.createSupplySeries());
 					pc_model.setDemandSeries(pc_model.createDemandSeries());
+					
 					revalidate();
 				}
 				else{
