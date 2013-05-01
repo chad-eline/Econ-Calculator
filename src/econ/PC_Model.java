@@ -34,7 +34,10 @@ class PC_Model extends Model{
 	public PC_Model(){
 	}
 
-	//This constructor that takes demand and supply slope and intercept
+	/**This constructor takes the supply and demand intercept and slope,
+	 * calculates the optimal quantity and price,
+	 * creates a supply and demand series,
+	 * and finally creates a dataset.*/
 	public PC_Model(double supplySlope, double supplyIntercept, double demandSlope, double demandIntercept){
 		
 		//Pass the method args. to the object data fields

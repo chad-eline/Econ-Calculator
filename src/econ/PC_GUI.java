@@ -147,8 +147,17 @@ public class PC_GUI extends JPanel{
 	class SolveButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 
-			/*TODO: Add a try/catch block around these doubles to check if they're null*/ 
 
+			//parse the values from the text field
+			//check if any came back null
+				//if they did break method
+				//if not assign to var
+			//check if the model already exsists
+				//if yes 
+					//update the input parameters
+					//call the calculate methods
+					//clear, recalculate, and set the series
+			
 			//Parse the double values from the text boxes
 			double SSlope = Double.parseDouble(jtfSupplySlope.getText());
 			double SIntercept = Double.parseDouble(jtfSupplyIntercept.getText());
@@ -156,17 +165,17 @@ public class PC_GUI extends JPanel{
 			double DIntercept = Double.parseDouble(jtfDemandIntercept.getText());
 
 
-			/**Want to update the series within the pc_model if TRUE, and just run the constructor if false
-			 * TODO: fix this if condition, which should check for null values
+			/** TODO: fix this if condition, which should check for null values
 			 * if((SSlope = null) && (SIntercept = null) && (DSlope = null) && (DIntercept = null)){ 
 			*/
 
 			if(isModelCreated){
 				//update the slope and intercept for the model
-				pc_model.setSupplySlope(SSlope);
-				pc_model.setSupplyIntercept(SIntercept);
-				pc_model.setDemandSlope(DSlope);
-				pc_model.setDemandIntercept(DIntercept);
+				//only update the model if the input is different than the original
+				if((SSlope != pc_model.getSupplySlope()) && (SSlope != 0)) pc_model.setSupplySlope(SSlope);
+				if(SIntercept != pc_model.getSupplyIntercept()) pc_model.setSupplyIntercept(SIntercept);
+				if(DSlope != pc_model.getDemandSlope()) pc_model.setDemandSlope(DSlope); 
+				if(DIntercept != pc_model.getDemandIntercept()) pc_model.setDemandIntercept(DIntercept);
 
 				/**Call the calc methods*/
 				pc_model.calcPrice();
@@ -188,7 +197,6 @@ public class PC_GUI extends JPanel{
 			}
 			else{
 				pc_model = new PC_Model(SSlope, SIntercept, DSlope, DIntercept);
-				pc_model.createDataset();
 				//add the model to the panel
 				add(createPanel(pc_model.getDataset()), BorderLayout.NORTH);
 				isModelCreated = true;
