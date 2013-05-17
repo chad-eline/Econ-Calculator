@@ -20,6 +20,15 @@ public class Cournot_Model{
 	public Cournot_Model(){
 	}
 	
-	//methods
+	
+	//calcQ1
+	//calcQ2
+	
+	//calcBR1
+	//calcBR2
+
+	//method: create data set
+	//method: create series
+
 	
 }

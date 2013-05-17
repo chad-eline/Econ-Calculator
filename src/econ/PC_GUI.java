@@ -178,12 +178,12 @@ public class PC_GUI extends JPanel{
 				if(DIntercept != pc_model.getDemandIntercept()) pc_model.setDemandIntercept(DIntercept);
 
 				/**Call the calc methods*/
-				pc_model.calcPrice();
-				pc_model.calcQuantity();
-				pc_model.calcCS();
-				pc_model.calcPS();
-				pc_model.calcW();
-				pc_model.calcDWL();
+				pc_model.calcOptimalPrice();
+				pc_model.calcOptimalQuantity();
+				pc_model.calcConsumerSurplus();
+				pc_model.calcProducerSurplus();
+				pc_model.calcWellfare();
+				pc_model.calcDdeadWeightLoss();
 
 				//Clear the series'
 				pc_model.getSupplySeries().clear();
@@ -201,10 +201,10 @@ public class PC_GUI extends JPanel{
 				add(createPanel(pc_model.getDataset()), BorderLayout.NORTH);
 				isModelCreated = true;
 			}
-			jtfPrice.setText(Double.toString(pc_model.calcPrice()));
-			jtfQuantity.setText(Double.toString(pc_model.calcQuantity()));
-			jtfCS.setText(Double.toString(pc_model.calcCS()));
-			jtfPS.setText(Double.toString(pc_model.calcPS()));
+			jtfPrice.setText(Double.toString(pc_model.calcOptimalPrice()));
+			jtfQuantity.setText(Double.toString(pc_model.calcOptimalQuantity()));
+			jtfCS.setText(Double.toString(pc_model.calcConsumerSurplus()));
+			jtfPS.setText(Double.toString(pc_model.calcProducerSurplus()));
 			
 //			Uncomment when a second set of curves is added
 //			jtfDWL.setText(Double.toString(pc_model.calcW()));
@@ -225,8 +225,8 @@ public class PC_GUI extends JPanel{
 		// create the chart...
 		JFreeChart chart = ChartFactory.createXYLineChart(
 				"Perfect Competition", // chart title
-				"X", // x axis label
-				"Y", // y axis label
+				"Quantity", // x axis label
+				"Price", // y axis label
 				dataset, // data
 				PlotOrientation.VERTICAL,
 				true, // include legend
@@ -236,7 +236,7 @@ public class PC_GUI extends JPanel{
 		// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
 		chart.setBackgroundPaint(Color.white);
 
-		// get a reference to the plot for further customisation...
+		// get a reference to the plot for further customization...
 		XYPlot plot = (XYPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.lightGray);
 		plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));		//HERE
@@ -249,7 +249,7 @@ public class PC_GUI extends JPanel{
 		// change the auto tick unit selection to integer units only...
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-
+		
 		// OPTIONAL CUSTOMIZATION COMPLETED.
 		return chart;
 	}

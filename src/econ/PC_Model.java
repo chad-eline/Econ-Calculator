@@ -16,18 +16,16 @@ class PC_Model extends Model{
 	private double demandIntercept;
 	private double supplySlope;
 	private double supplyIntercept;
-	private double optimal_Price;
-	private double optimal_Quantity;
-	private double welfare;				//W = cs + ps
-	private double cs;					//consumer surplus
-	private double ps;					//producerSurplus
-	private double dwl;					//dead weight loss
+	private double optimalPrice;
+	private double optimalQuantity;
+	private double consumerSurplus;		
+	private double producerSurplus;
+	private double wellfare;		
+	private double deadWeighLoss;					
 
-	//private data fields for supply and demand series
+	//private data fields for supply series, demand series, and the dataset
 	private XYSeries demandSeries = new XYSeries("Demand");
 	private XYSeries supplySeries = new XYSeries("Supply");
-	
-	//private data field for dataset
 	private XYDataset dataset;
 
 	//default no arg constructor
@@ -47,8 +45,8 @@ class PC_Model extends Model{
 		this.demandIntercept = demandIntercept;
 
 		//Call the calculate the price and qauntity methods and store the results in their respective datafields
-		this.optimal_Price = calcPrice();
-		this.optimal_Quantity = calcQuantity();
+		this.optimalPrice = calcOptimalPrice();
+		this.optimalQuantity = calcOptimalQuantity();
 
 		//Populate the Supply and demand series
 		this.demandSeries = createDemandSeries();
@@ -59,13 +57,13 @@ class PC_Model extends Model{
 	}
 	
 	//Calculates optimal price 
-	public double calcPrice(){
-		return optimal_Price = ((demandIntercept * supplySlope) + (demandSlope * supplyIntercept)) / (demandSlope + supplySlope); 
+	public double calcOptimalPrice(){
+		return optimalPrice = ((demandIntercept * supplySlope) + (demandSlope * supplyIntercept)) / (demandSlope + supplySlope); 
 	}
 
 	//Calculates optimal quantity
-	public double calcQuantity(){
-		return optimal_Quantity = ((demandIntercept - Math.abs(supplyIntercept)) / (demandSlope + supplySlope));
+	public double calcOptimalQuantity(){
+		return optimalQuantity = ((demandIntercept - Math.abs(supplyIntercept)) / (demandSlope + supplySlope));
 	}
 	
 	/**Method: CalcCS
@@ -74,8 +72,8 @@ class PC_Model extends Model{
 	 * Output: double
 	 * Purpose:Calculates the consumer surplus for the Perfectly Competitive data model
 	 **/
-	public double calcCS(){
-		return cs = 0.5*(demandIntercept - optimal_Price)*optimal_Quantity;
+	public double calcConsumerSurplus(){
+		return consumerSurplus = 0.5*(demandIntercept - optimalPrice)*optimalQuantity;
 	}
 
 	/**Method: CalcPS
@@ -84,8 +82,8 @@ class PC_Model extends Model{
 	 * Output: double
 	 * Purpose: Calculates the producer surplus for the Perfectly Competitive data model
 	 **/
-	public double calcPS(){
-		return ps = 0.5*(optimal_Price - supplyIntercept)*optimal_Quantity;
+	public double calcProducerSurplus(){
+		return producerSurplus = 0.5*(optimalPrice - supplyIntercept)*optimalQuantity;
 	}	
 
 	/**Method: CalcW
@@ -95,8 +93,8 @@ class PC_Model extends Model{
 	 * Purpose: Calculates the wellfare for the Perfectly Competitive data model
 	 * TODO: finish this method and debug
 	 **/
-	public double calcW(){
-		return welfare = cs + ps;
+	public double calcWellfare(){
+		return wellfare = consumerSurplus + producerSurplus;
 	}	
 
 	/**Method: CalcDWL
@@ -106,12 +104,9 @@ class PC_Model extends Model{
 	 * Purpose: Calculates the dead weight loss for the Perfectly Competitive data model
 
 	 **/
-	public double calcDWL(){
-		return dwl = 0.5*(optimal_Price - supplyIntercept)*optimal_Quantity;
+	public double calcDdeadWeightLoss(){
+		return deadWeighLoss = 0.5*(optimalPrice - supplyIntercept)*optimalQuantity;
 	}	
-	
-	
-	
 	
 	//createDemandSeries: Populates the Demand series for this model object
 	public XYSeries createDemandSeries(){
@@ -135,7 +130,7 @@ class PC_Model extends Model{
 		if(this.supplySeries.isEmpty() == false){
 			System.out.println("SupplySeries is !empty, it will be cleared");	
 		}
-		while((q <= (1.02*this.optimal_Quantity)) || (p<=(1.02*this.optimal_Price))){
+		while((q <= (1.02*this.optimalQuantity)) || (p<=(1.02*this.optimalPrice))){
 			p = this.supplyIntercept + (this.supplySlope * q);
 			this.supplySeries.add(q,p);
 			q++;
@@ -155,6 +150,7 @@ class PC_Model extends Model{
 			dataset.addSeries(this.supplySeries);
 		}
 		else{
+			//TODO: Remove this from prod
 			System.out.println("Supply Series is null");
 		}
 		
@@ -162,6 +158,7 @@ class PC_Model extends Model{
 			dataset.addSeries(this.demandSeries);			
 		}
 		else{
+			//TODO: Remove this from prod
 			System.out.println("Demand Series is null");
 		}
 		return dataset;
@@ -225,18 +222,18 @@ class PC_Model extends Model{
 	}
 
 	public double getOptimal_Price() {
-		return optimal_Price;
+		return optimalPrice;
 	}
 
 	public void setOptimal_Price(double optimal_Price) {
-		this.optimal_Price = optimal_Price;
+		this.optimalPrice = optimal_Price;
 	}
 
 	public double getOptimal_Quantity() {
-		return optimal_Quantity;
+		return optimalQuantity;
 	}
 
 	public void setOptimal_Quantity(double optimal_Quantity) {
-		this.optimal_Quantity = optimal_Quantity;
+		this.optimalQuantity = optimal_Quantity;
 	}
 }
