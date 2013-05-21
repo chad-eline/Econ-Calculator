@@ -122,8 +122,8 @@ public class PC extends JPanel{
 								Double.parseDouble(jtfDemandIntercept.getText())
 							);
 							//sets text on gui
-							jtfPrice.setText(Double.toString(model.calcPrice()));
-							jtfQuantity.setText(Double.toString(model.calcQuantity()));
+							jtfPrice.setText(Double.toString(model.calcOptimalPrice()));
+							jtfQuantity.setText(Double.toString(model.calcOptimalQuantity()));
 
 							
 							/**TODO: update logic here to match logic from switching 

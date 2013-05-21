@@ -91,7 +91,7 @@ public class PC_GUI extends JPanel{
 	public PC_GUI(){
 		//create a new JPanel to place buttons into, and place the buttons in the panel 
 		JPanel inputPanel = new JPanel();
-		inputPanel.setLayout(new GridLayout(0,4,5,5));
+		inputPanel.setLayout(new GridLayout(0,4,15,5));
 
 		//add supply objects to inputpanel
 		inputPanel.add(jlSupplySlope);
@@ -205,6 +205,7 @@ public class PC_GUI extends JPanel{
 			jtfQuantity.setText(Double.toString(pc_model.calcOptimalQuantity()));
 			jtfCS.setText(Double.toString(pc_model.calcConsumerSurplus()));
 			jtfPS.setText(Double.toString(pc_model.calcProducerSurplus()));
+			jtfW.setText(Double.toString(pc_model.calcWellfare()));
 			
 //			Uncomment when a second set of curves is added
 //			jtfDWL.setText(Double.toString(pc_model.calcW()));
