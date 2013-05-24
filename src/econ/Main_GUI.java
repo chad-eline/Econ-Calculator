@@ -53,7 +53,6 @@ public class Main_GUI extends JFrame{
 				repaint();
 				break;
 			case "Perfect Competition":
-				//remove(graph);
 				PC_GUI pcgui = new PC_GUI();
 				add(pcgui, BorderLayout.CENTER);
 				revalidate();
