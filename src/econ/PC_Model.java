@@ -130,7 +130,7 @@ class PC_Model extends Model{
 		if(this.supplySeries.isEmpty() == false){
 			System.out.println("SupplySeries is !empty, it will be cleared");	
 		}
-		while((q <= (1.02*this.optimalQuantity)) || (p<=(1.02*this.optimalPrice))){
+		while((q <= (1.02 * this.optimalQuantity)) || (p <= (1.02 * this.optimalPrice))){
 			p = this.supplyIntercept + (this.supplySlope * q);
 			this.supplySeries.add(q,p);
 			q++;

@@ -45,8 +45,7 @@ import org.jfree.ui.RectangleInsets;
 public class PC_GUI extends JPanel{
 
 	/*Creates a null instance of pc_model for now.
-	 * TODO: Determine an appropriate data structure and location of said data strucutre to store PC_Models
-	 */
+	 * TODO: Determine an appropriate data structure and location to store PC_Models, like an arrayList right here*/
 	private PC_Model pc_model;
 
 	/**Keeps track of whether or not the panel has a model on it.
@@ -54,6 +53,7 @@ public class PC_GUI extends JPanel{
 	private boolean isModelCreated = false;
 
 	//----- GUI INPUTS COMPONENTS -----
+
 	//create the buttons and text fields
 	private JButton jbtSolve = new JButton("Solve");
 
@@ -152,7 +152,7 @@ public class PC_GUI extends JPanel{
 			//check if any came back null
 				//if they did break method
 				//if not assign to var
-			//check if the model already exsists
+			//check if the model already exists
 				//if yes 
 					//update the input parameters
 					//call the calculate methods
@@ -250,13 +250,11 @@ public class PC_GUI extends JPanel{
 		// change the auto tick unit selection to integer units only...
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		
-		// OPTIONAL CUSTOMIZATION COMPLETED.
+
 		return chart;
 	}
 
-
-	//Creates and returns a JPanel with a chart on it 
+//Creates and returns a JPanel with a chart on it 
 	public static JPanel createPanel(XYDataset data) {
 		JFreeChart chart = createChart(data);
 		return new ChartPanel(chart);
