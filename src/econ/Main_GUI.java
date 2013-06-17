@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import econ.model_gui.PC_GUI;
+
 /**TODO: Change super of Main_GUI from JFrame to JPanel. I want to use 
  * lightweight swing ONLY and not heavy awt*/
 public class Main_GUI extends JFrame{
@@ -35,6 +37,8 @@ public class Main_GUI extends JFrame{
 		
 		//add action listeners to the combo box
 		modelList.setSelectedIndex(0);
+		
+		//possibly add a JFrame arg to comboBoxListener so that you can reference the frame
 		modelList.addActionListener(new ComboBoxListener());
 		
 		this.add(modelList, BorderLayout.NORTH);	//add the modeList jcombobox to the JFrame
@@ -44,12 +48,16 @@ public class Main_GUI extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			JComboBox cb = (JComboBox) e.getSource();
 			String modelName = (String) cb.getSelectedItem();
+			//clear the panel if another model is selected
+			//else if they match do nothing
+			//* if(modelName != currentGraphsModelName){	remove(graph); panel.clear;}
+			//add a clear\delete method for the JFRAME
+			//method should clear the frame when called
 			switch(modelName){
 			case "Bertrand": 
 			case "Cournot":
 			case "Monopoly":
 			case "Stackleburg":
-				//remove(graph);
 				repaint();
 				break;
 			case "Perfect Competition":
@@ -62,6 +70,7 @@ public class Main_GUI extends JFrame{
 		}
 	}
 
+	//main method, starts app
 	public static void main(String[] args){
 		/**For Testing. 
 		 * TODO: Remove and finalize this code.*/

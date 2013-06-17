@@ -1,4 +1,4 @@
-package econ;
+package econ.model_gui;
 /**This class create the perfect competition gui that allows the user to interact
  * with the pc_model. This class should not control any of the data for the model.
  * It's only role is to:
@@ -39,13 +39,15 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleInsets;
 
+import econ.model.PC_Model;
+
 
 /**TODO: Devise way of updating chart once it painted to the canvas instead of deleting and creating a new one. */
 @SuppressWarnings("serial")
 public class PC_GUI extends JPanel{
 
-	/*Creates a null instance of pc_model for now.
-	 * TODO: Determine an appropriate data structure and location to store PC_Models, like an arrayList right here*/
+	/*TODO: switch to using PCList instead of pc_model variable*/
+	private ArrayList <PC_Model> PCList;
 	private PC_Model pc_model;
 
 	/**Keeps track of whether or not the panel has a model on it.
@@ -53,23 +55,13 @@ public class PC_GUI extends JPanel{
 	private boolean isModelCreated = false;
 
 	//----- GUI INPUTS COMPONENTS -----
-
-	//create the buttons and text fields
 	private JButton jbtSolve = new JButton("Solve");
-
-	//demand slope button and label
 	private JTextField jtfDemandSlope = new JTextField("");
 	private JLabel jlDemandSlope = new JLabel("Demand Slope");
-
-	//demand intercept button and label
 	private JTextField jtfDemandIntercept = new JTextField("");
 	private JLabel jlDemandIntercept = new JLabel("Demand Intercept");
-
-	//supply slope button and label
 	private JTextField jtfSupplySlope = new JTextField("");
 	private JLabel jlSupplySlope = new JLabel("Supply Slope");
-
-	//SUPPLY intercept button and label
 	private JTextField jtfSupplyIntercept = new JTextField("");
 	private JLabel jlSupplyIntercept = new JLabel("Supply Intercept");
 
@@ -270,7 +262,7 @@ public class PC_GUI extends JPanel{
 		frame.setTitle("Testing PC_GUI and PC_Model");
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(500,600));
+		frame.setPreferredSize(new Dimension(600,600));
 
 		//add pc to frame, pack, and set visible
 		frame.add(test);

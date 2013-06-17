@@ -1,7 +1,7 @@
 /**Top level generic class that will be super to all other model classes.
  * Allows for polymorphism between objects*/
 
-package econ;
+package econ.model;
 
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeriesCollection;

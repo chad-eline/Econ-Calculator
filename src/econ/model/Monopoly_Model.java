@@ -1,5 +1,5 @@
 /**This class represents the data model object for the a monopoly market.*/
-package econ;
+package econ.model;
 
 public class Monopoly_Model{
 

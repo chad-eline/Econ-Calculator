@@ -3,7 +3,7 @@
  * 
 */
 
-package econ;
+package econ.model;
 
 public class Cournot_Model{
 	

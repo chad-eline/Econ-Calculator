@@ -1,10 +1,11 @@
-package econ;
+package econ.model;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetGroup;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
 
 /**This is the clean version of the Perfect Competition data model.
 TODO: add methods to handle the creation of the datasets and the series*/
