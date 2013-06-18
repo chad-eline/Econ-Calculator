@@ -1,7 +1,7 @@
 /**This class represents the data model object for the a monopoly market.*/
 package econ.model;
 
-public class Monopoly_Model{
+public class Monopoly_Model extends Model{
 
 	
 	//identify data fields for this model
@@ -17,10 +17,7 @@ public class Monopoly_Model{
 	}
 	
 	//constructor with params
-	public Monopoly_Model(){
-	}
-	
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
 	}
 }

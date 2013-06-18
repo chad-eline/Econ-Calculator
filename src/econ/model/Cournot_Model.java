@@ -19,17 +19,13 @@ public class Cournot_Model{
 
 	
 	//Defautl no-arg constructor
-	public Cournot_Model(){
-	}
+
+	
+	//	*** Methods ***
 	
 	//calcQ1
 	//calcQ2
 	
 	//calcBR1
 	//calcBR2
-
-	//method: create data set
-	//method: create series
-
-	
 }
