@@ -1,5 +1,5 @@
 package econ.model_gui;
 
-public class Cournot_GUI {
+public class Cournot_GUI extends Model_GUI{
 
 }

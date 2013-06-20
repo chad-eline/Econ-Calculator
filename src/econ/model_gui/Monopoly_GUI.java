@@ -2,7 +2,5 @@
 
 package econ.model_gui;
 
-public class Monopoly_GUI {
-	public static void main(String[] args) {
-	}
+public class Monopoly_GUI extends Model_GUI{
 }

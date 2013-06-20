@@ -6,10 +6,6 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-
-/**This is the clean version of the Perfect Competition data model.
-TODO: add methods to handle the creation of the datasets and the series*/
-
 public class PC_Model extends Model{
 
 	//private data fields for price and quantity
@@ -67,44 +63,23 @@ public class PC_Model extends Model{
 		return optimalQuantity = ((demandIntercept - Math.abs(supplyIntercept)) / (demandSlope + supplySlope));
 	}
 	
-	/**Method: CalcCS
-	 * Formula: 
-	 * Input: null
-	 * Output: double
-	 * Purpose:Calculates the consumer surplus for the Perfectly Competitive data model
-	 **/
+	/**Calculates the consumer surplus for the Perfectly Competitive data model.*/
 	public double calcConsumerSurplus(){
-		return consumerSurplus = 0.5*(demandIntercept - optimalPrice)*optimalQuantity;
+		return consumerSurplus = 0.5*(demandIntercept - optimalPrice) * optimalQuantity;
 	}
 
-	/**Method: CalcPS
-	 * Formula:
-	 * Input: null
-	 * Output: double
-	 * Purpose: Calculates the producer surplus for the Perfectly Competitive data model
-	 **/
+	/**Calculates the producer surplus for the Perfectly Competitive data model*/
 	public double calcProducerSurplus(){
-		return producerSurplus = 0.5*(optimalPrice - supplyIntercept)*optimalQuantity;
+		return producerSurplus = 0.5*(optimalPrice - supplyIntercept) * optimalQuantity;
 	}	
 
-	/**Method: CalcW
-	 * Formula:
-	 * Input: null
-	 * Output: double
-	 * Purpose: Calculates the wellfare for the Perfectly Competitive data model
-	 * TODO: finish this method and debug
-	 **/
+	/**Calculates the wellfare for the Perfectly Competitive data model
+	 * TODO: finish this method and debug*/
 	public double calcWellfare(){
 		return wellfare = consumerSurplus + producerSurplus;
 	}	
 
-	/**Method: CalcDWL
-	 * Formula:
-	 * Input: null
-	 * Output: double
-	 * Purpose: Calculates the dead weight loss for the Perfectly Competitive data model
-
-	 **/
+	/**Calculates the dead weight loss for the Perfectly Competitive data model*/
 	public double calcDdeadWeightLoss(){
 		return deadWeighLoss = 0.5*(optimalPrice - supplyIntercept)*optimalQuantity;
 	}	
@@ -112,12 +87,13 @@ public class PC_Model extends Model{
 	//createDemandSeries: Populates the Demand series for this model object
 	public XYSeries createDemandSeries(){
 		if(this.demandSeries.isEmpty() == false){
-			System.out.println("DemandSeries is !empty, it will be cleared");
+			System.out.println("DemandSeries is empty, it will be cleared");
 			this.demandSeries.clear();
 		}
-		for(double p = this.demandIntercept; p > 0; p--){
+		for(double p = this.demandIntercept; p >= 0; p--){
 			double q = (this.demandIntercept - p)/this.demandSlope;
 			this.demandSeries.add(q,p);
+			//TODO: add a data point for q=0 that's dynamic
 		}
 		return this.demandSeries;
 	}
@@ -131,7 +107,7 @@ public class PC_Model extends Model{
 		if(this.supplySeries.isEmpty() == false){
 			System.out.println("SupplySeries is !empty, it will be cleared");	
 		}
-		while((q <= (1.02 * this.optimalQuantity)) || (p <= (1.02 * this.optimalPrice))){
+		while((q <= (1.2 * this.optimalQuantity)) || (p <= (1.2 * this.optimalPrice))){
 			p = this.supplyIntercept + (this.supplySlope * q);
 			this.supplySeries.add(q,p);
 			q++;

@@ -6,12 +6,6 @@ package econ.model_gui;
  		-create pc_model objects
  		-keep track of these objects
  		-and delete them as necessary
- * MAJOR TODOS!
- * TODO: Move the action event listener into its one class.
- * TODO: Clean up this class! Redo application logic and ensure that 
- * the application logic makes sense. 
- * TODO: Implement an ArrayList or Vector into this class to manage multiple
- * PC_Model classes.
  */
 
 import java.awt.BorderLayout;
@@ -24,6 +18,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
@@ -32,6 +27,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYAreaRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.xy.XYDataset;
@@ -41,10 +37,8 @@ import org.jfree.ui.RectangleInsets;
 
 import econ.model.PC_Model;
 
-
-/**TODO: Devise way of updating chart once it painted to the canvas instead of deleting and creating a new one. */
 @SuppressWarnings("serial")
-public class PC_GUI extends JPanel{
+public class PC_GUI extends Model_GUI{
 
 	/*TODO: switch to using PCList instead of pc_model variable*/
 	private ArrayList <PC_Model> PCList;
@@ -54,8 +48,16 @@ public class PC_GUI extends JPanel{
 	 * TODO: implement a better way to do this. Possibly in the action event listener somehow*/
 	private boolean isModelCreated = false;
 
-	//----- GUI INPUTS COMPONENTS -----
+	//----- GUI Buttons -----
 	private JButton jbtSolve = new JButton("Solve");
+	
+	/*TODO: Add later
+	private JButton jbtAddDemandSeries = new JButton("+");
+	private JButton jbtAddSupplySeries = new JButton("+");
+	private JButton jbtRemoveDemandSeries = new JButton("-");	
+	private JButton jbtRemoveSupplySeries = new JButton("-");*/
+	
+	//----- GUI INPUTS COMPONENTS -----
 	private JTextField jtfDemandSlope = new JTextField("");
 	private JLabel jlDemandSlope = new JLabel("Demand Slope");
 	private JTextField jtfDemandIntercept = new JTextField("");
@@ -96,10 +98,10 @@ public class PC_GUI extends JPanel{
 		inputPanel.add(jtfDemandSlope);
 		inputPanel.add(jlDemandIntercept);
 		inputPanel.add(jtfDemandIntercept);
-		inputPanel.add(jlPrice);
-		inputPanel.add(jtfPrice);
 		inputPanel.add(jlQuantity);
 		inputPanel.add(jtfQuantity);
+		inputPanel.add(jlPrice);
+		inputPanel.add(jtfPrice);
 		inputPanel.add(jlCS);
 		inputPanel.add(jtfCS);
 		inputPanel.add(jlPS);
@@ -137,30 +139,17 @@ public class PC_GUI extends JPanel{
 
 	// ----- LISTENERS -----
 	class SolveButtonListener implements ActionListener{
+		
+		/*TODO: Add logic to figure out which field is missing a value, 
+		and calculate it's values give the other input variables.*/		
 		public void actionPerformed(ActionEvent e) {
 
-
-			//parse the values from the text field
-			//check if any came back null
-				//if they did break method
-				//if not assign to var
-			//check if the model already exists
-				//if yes 
-					//update the input parameters
-					//call the calculate methods
-					//clear, recalculate, and set the series
+			//Convert strings to doubles and check for null strings
+			double SSlope = convertInput(jtfSupplySlope);
+			double SIntercept = convertInput(jtfSupplyIntercept);
+			double DSlope = convertInput(jtfDemandSlope);
+			double DIntercept = convertInput(jtfDemandIntercept);
 			
-			//Parse the double values from the text boxes
-			double SSlope = Double.parseDouble(jtfSupplySlope.getText());
-			double SIntercept = Double.parseDouble(jtfSupplyIntercept.getText());
-			double DSlope = Double.parseDouble(jtfDemandSlope.getText());
-			double DIntercept = Double.parseDouble(jtfDemandIntercept.getText());
-
-
-			/** TODO: fix this if condition, which should check for null values
-			 * if((SSlope = null) && (SIntercept = null) && (DSlope = null) && (DIntercept = null)){ 
-			*/
-
 			if(isModelCreated){
 				//update the slope and intercept for the model
 				//only update the model if the input is different than the original
@@ -206,6 +195,20 @@ public class PC_GUI extends JPanel{
 			//validates the panel object
 			validate();
 		}
+		
+		/*Converts a text field to a usable double and check if the value is blank.*/
+		public double convertInput(JTextField j){
+			//get text from JTF
+			String s = j.getText();	
+
+			//Loop until string is not null
+			while(s == null || s.length() == 0){
+				s = JOptionPane.showInputDialog("Whoops! Looks like you left" + j.getName() + " blank. " +
+						"Why don't you give that another shot?");
+			}
+			j.setText(s);	//set the text to the new value
+			return Double.parseDouble(s);	//return valid double value
+		}
 	}
 
 	/**
@@ -238,6 +241,7 @@ public class PC_GUI extends JPanel{
 		XYLineAndShapeRenderer renderer	= (XYLineAndShapeRenderer) plot.getRenderer();
 		renderer.setShapesVisible(true);
 		renderer.setShapesFilled(true);
+		//TODO:XYAreaRenderer.;
 
 		// change the auto tick unit selection to integer units only...
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
