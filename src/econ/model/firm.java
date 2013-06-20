@@ -88,8 +88,8 @@ public class firm{
 		return this.revenue;
 	}
 	
-	public double calcQuantity(){ 
-		return null;
+	public double calcQuantity(){
+		return 0;
 	}
 
 	//getters and settters
@@ -101,11 +101,11 @@ public class firm{
 		return this.intercept;
 	}
 
-	public void setSlope(doube slope){ 
+	public void setSlope(double slope){ 
 		this.slope = slope;
 	}
 
-	public void setIntercept(doube intercept){ 
+	public void setIntercept(double intercept){ 
 		this.intercept = intercept;
 	}
 }

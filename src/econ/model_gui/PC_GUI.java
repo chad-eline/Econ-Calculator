@@ -40,8 +40,6 @@ import econ.model.PC_Model;
 @SuppressWarnings("serial")
 public class PC_GUI extends Model_GUI{
 
-	/*TODO: switch to using PCList instead of pc_model variable*/
-	private ArrayList <PC_Model> PCList;
 	private PC_Model pc_model;
 
 	/**Keeps track of whether or not the panel has a model on it.
