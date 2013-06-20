@@ -19,10 +19,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import econ.model_gui.Bertrand_GUI;
 import econ.model_gui.Cournot_GUI;
 import econ.model_gui.Model_GUI;
 import econ.model_gui.Monopoly_GUI;
 import econ.model_gui.PC_GUI;
+import econ.model_gui.Stackleburg_GUI;
 
 /**TODO: Change super of Main_GUI from JFrame to JPanel. I want to use 
  * lightweight swing ONLY and not heavy awt*/

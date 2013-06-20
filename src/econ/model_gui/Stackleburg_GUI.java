@@ -1,6 +1,5 @@
-package econ;
+package econ.model_gui;
 
-import econ.model_gui.Model_GUI;
 
 public class Stackleburg_GUI extends Model_GUI {
 
