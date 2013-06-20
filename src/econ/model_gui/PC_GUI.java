@@ -1,12 +1,6 @@
 package econ.model_gui;
 /**This class create the perfect competition gui that allows the user to interact
- * with the pc_model. This class should not control any of the data for the model.
- * It's only role is to:
- 		-take user inputs
- 		-create pc_model objects
- 		-keep track of these objects
- 		-and delete them as necessary
- */
+ * with the pc_model. This class should not control any of the data for the model.*/
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -96,6 +90,8 @@ public class PC_GUI extends Model_GUI{
 		inputPanel.add(jtfDemandSlope);
 		inputPanel.add(jlDemandIntercept);
 		inputPanel.add(jtfDemandIntercept);
+		
+		//add output
 		inputPanel.add(jlQuantity);
 		inputPanel.add(jtfQuantity);
 		inputPanel.add(jlPrice);
@@ -132,7 +128,6 @@ public class PC_GUI extends Model_GUI{
 		jtfPS.addActionListener(sBListener);
 		jtfW.addActionListener(sBListener);
 		jtfDWL.addActionListener(sBListener);
-
 	}
 
 	// ----- LISTENERS -----
@@ -248,7 +243,7 @@ public class PC_GUI extends Model_GUI{
 		return chart;
 	}
 
-//Creates and returns a JPanel with a chart on it 
+	//Creates and returns a JPanel with a chart on it 
 	public static JPanel createPanel(XYDataset data) {
 		JFreeChart chart = createChart(data);
 		return new ChartPanel(chart);

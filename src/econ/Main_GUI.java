@@ -32,7 +32,7 @@ public class Main_GUI extends JFrame{
 	
 	/**Default X and Y frame sizes for the application frame window*/
 	public static final int DEFAULT_MAIN_WINDOW_SIZE_X = 600;
-	public static final int DEFAULT_MAIN_WINDOW_SIZE_Y = 475;
+	public static final int DEFAULT_MAIN_WINDOW_SIZE_Y = 600;
 	
 	/**Default frame title*/
 	public static final String DEFAULT_FRAME_TITLE = "My Econ Tutor";
@@ -45,13 +45,11 @@ public class Main_GUI extends JFrame{
 	
 	/**Constructor: */
 	public Main_GUI(){
-		setLayout(new BorderLayout());						//set the layout for the jframe
-		modelList.setSelectedIndex(0);						//add action listeners to the combo box
+		setLayout(new BorderLayout());							//set the layout for the jframe
+		modelList.setSelectedIndex(0);							//add action listeners to the combo box
 		modelList.addActionListener(new ComboBoxListener());
-		this.add(modelList, BorderLayout.NORTH);			//add the modeList jcombobox to the JFrame
+		this.add(modelList, BorderLayout.NORTH);				//add the modeList jcombobox to the JFrame
 	}
-	
-	//need a way to remove the current model from the canvas
 	
 	class ComboBoxListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -65,7 +63,6 @@ public class Main_GUI extends JFrame{
 				gui = guiList.get(numGUIS);
 				remove(gui);
 				guiList.remove(gui);
-				validate();
 			}
 			
 			switch(modelName){
@@ -73,41 +70,34 @@ public class Main_GUI extends JFrame{
 				gui = new Bertrand_GUI();
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
-				revalidate();
-				validate();
 				numGUIS++;
 				break;
 			case "Cournot":
 				gui = new Cournot_GUI();
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
-				revalidate();
-				validate();
 				numGUIS++;
 				break;
 			case "Monopoly":
 				gui = new Monopoly_GUI();
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
-				revalidate();
-				validate();
 				numGUIS++;
 			case "Stackleburg":
 				gui = new Stackleburg_GUI();
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
-				revalidate();
-				validate();
 				numGUIS++;
 			case "Perfect Competition":
 				gui = new PC_GUI();
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
-				revalidate();
-				validate();
 				numGUIS++;
 				break;
 			}
+			revalidate();
+			validate();
+			repaint();
 		}
 	}
 
@@ -122,5 +112,6 @@ public class Main_GUI extends JFrame{
 		mPanel.setLocationRelativeTo(null);										//sets the relative location of the frame to the center of the screen
 		mPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mPanel.setVisible(true);
+
 	}
 }
