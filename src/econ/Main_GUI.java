@@ -32,7 +32,7 @@ public class Main_GUI extends JFrame{
 	
 	/**Default X and Y frame sizes for the application frame window*/
 	public static final int DEFAULT_MAIN_WINDOW_SIZE_X = 600;
-	public static final int DEFAULT_MAIN_WINDOW_SIZE_Y = 600;
+	public static final int DEFAULT_MAIN_WINDOW_SIZE_Y = 650;
 	
 	/**Default frame title*/
 	public static final String DEFAULT_FRAME_TITLE = "My Econ Tutor";
@@ -61,10 +61,11 @@ public class Main_GUI extends JFrame{
 			if(numGUIS > 0){
 				numGUIS--;
 				gui = guiList.get(numGUIS);
+				gui.invalidate();
+				gui.removeAll();
 				remove(gui);
 				guiList.remove(gui);
 			}
-			
 			switch(modelName){
 			case "Bertrand":
 				gui = new Bertrand_GUI();
@@ -83,11 +84,13 @@ public class Main_GUI extends JFrame{
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
 				numGUIS++;
+				break;
 			case "Stackleburg":
 				gui = new Stackleburg_GUI();
 				guiList.add(gui);
 				add(gui, BorderLayout.CENTER);
 				numGUIS++;
+				break;
 			case "Perfect Competition":
 				gui = new PC_GUI();
 				guiList.add(gui);

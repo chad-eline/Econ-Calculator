@@ -33,7 +33,7 @@ public class Model_GUI extends JPanel{
 	 * @return a chart.
 	 */
 	@SuppressWarnings("deprecation")
-	private static JFreeChart createChart(XYDataset dataset, String modelName, String xAxis, String yAxis) {
+	private static JFreeChart createChart(XYDataset dataset, String modelName, String xAxis, String yAxis){
 		JFreeChart chart = ChartFactory.createXYLineChart(modelName, xAxis, yAxis, dataset, PlotOrientation.VERTICAL, true, true, false);
 		chart.setBackgroundPaint(Color.white);
 		XYPlot plot = (XYPlot) chart.getPlot();
@@ -47,12 +47,11 @@ public class Model_GUI extends JPanel{
 		return chart;
 	}
 
-	
-		/**Creates and returns a JPanel with a chart on it*/ 
-		public static JPanel createPanel(XYDataset data) {
-			JFreeChart chart = createChart(data);
-			return new ChartPanel(chart);
-		}
+	/**Creates and returns a JPanel with a chart on it*/ 
+	public static JPanel createPanel(XYDataset data, String modelName, String xAxis, String yAxis) {
+		JFreeChart chart = createChart(data, modelName, xAxis, yAxis);
+		return new ChartPanel(chart);
+	}
 		
 	//Inner Classes
 

@@ -199,7 +199,7 @@ public class PC_GUI extends Model_GUI{
 				s = JOptionPane.showInputDialog("Whoops! Looks like you left" + j.getName() + " blank. " +
 						"Why don't you give that another shot?");
 			}
-			j.setText(s);	//set the text to the new value
+			j.setText(s);					//set the text to the new value
 			return Double.parseDouble(s);	//return valid double value
 		}
 	}
@@ -210,7 +210,7 @@ public class PC_GUI extends Model_GUI{
 	 * @return a chart.
 	 */
 	@SuppressWarnings("deprecation")
-	private static JFreeChart createChart(XYDataset dataset) {
+	private static JFreeChart createChart(XYDataset dataset){
 		// create the chart...
 		JFreeChart chart = ChartFactory.createXYLineChart(
 				"Perfect Competition", // chart title
@@ -222,10 +222,10 @@ public class PC_GUI extends Model_GUI{
 				true, // tooltips
 				false // urls
 				);
-		// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
+		//NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART
 		chart.setBackgroundPaint(Color.white);
 
-		// get a reference to the plot for further customization...
+		//Get a reference to the plot for further customization
 		XYPlot plot = (XYPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.lightGray);
 		plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));		//HERE
@@ -239,7 +239,6 @@ public class PC_GUI extends Model_GUI{
 		// change the auto tick unit selection to integer units only...
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-
 		return chart;
 	}
 
