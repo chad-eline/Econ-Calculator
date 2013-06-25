@@ -247,22 +247,4 @@ public class PC_GUI extends Model_GUI{
 		JFreeChart chart = createChart(data);
 		return new ChartPanel(chart);
 	}
-	// ----- METHODS END -----
-
-	//Main method: start the program
-	public static void main (String [] args){
-
-		//create frame and pc object
-		PC_GUI test = new PC_GUI();
-		JFrame frame = new JFrame();
-		frame.setTitle("Testing PC_GUI and PC_Model");
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(600,600));
-
-		//add pc to frame, pack, and set visible
-		frame.add(test);
-		frame.pack();
-		frame.setVisible(true);
-	}
 }
