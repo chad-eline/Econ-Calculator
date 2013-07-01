@@ -5,7 +5,7 @@ public class Cournot_GUI extends Model_GUI{
 	//Constructors
 	
 	/**Default no arg's constructor*/
-	Cournot_GUI(){
+	public Cournot_GUI(){
 	}
 	
 	//Methods
