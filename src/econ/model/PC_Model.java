@@ -28,7 +28,6 @@ public class PC_Model extends Model{
 	//private data fields for supply series, demand series, and the dataset
 	private XYSeries demandSeries = new XYSeries("Demand");
 	private XYSeries supplySeries = new XYSeries("Supply");
-	private XYDataset dataset;
 
 	//default no arg constructor
 	public PC_Model(){
@@ -53,9 +52,6 @@ public class PC_Model extends Model{
 		//Populate the Supply and demand series
 		this.demandSeries = createDemandSeries();
 		this.supplySeries = createSupplySeries();
-		
-		//Populate the dataset
-		this.dataset = createDataset();
 	}
 	
 	//Calculates optimal price 
@@ -147,14 +143,6 @@ public class PC_Model extends Model{
 	}
 
 	//	---	Getters and Setters	---
-	public XYDataset getDataset() {
-		return dataset;
-	}
-
-	public void setDataset(XYDataset dataset) {
-		this.dataset = dataset;
-	}	
-	
 	public XYSeries getDemandSeries() {
 		return demandSeries;
 	}

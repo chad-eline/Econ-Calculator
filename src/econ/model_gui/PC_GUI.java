@@ -35,6 +35,7 @@ import econ.model.PC_Model;
 public class PC_GUI extends Model_GUI{
 
 	private PC_Model pc_model;
+	private Dataset dataset;
 
 	/**Keeps track of whether or not the panel has a model on it.
 	 * TODO: implement a better way to do this. Possibly in the action event listener somehow*/
@@ -172,6 +173,7 @@ public class PC_GUI extends Model_GUI{
 			else{
 				pc_model = new PC_Model(SSlope, SIntercept, DSlope, DIntercept);
 				//add the model to the panel
+				//TODO: Add createDataset method in this class.
 				add(createChart(pc_model.getDataset(), pc_model.getModelName(), pc_model.getXAxisName(), pc_model.getYAxisName()), BorderLayout.NORTH);
 				isModelCreated = true;
 			}
@@ -205,20 +207,31 @@ public class PC_GUI extends Model_GUI{
 		}
 	}
 
+	//Creates a dataset for 1 model
+	public Dataset createDataSet(PC_Model pc){
+		return null;
+	}
+	
+	//Creates a data set for 2 models
+	public Dataset createDataSet(PC_Model pc1, PC_Model pc2){
+		return null;
+	}
+
+	
 	/**
 	 * Creates the chart from the data set
 	 * @param dataset - the data for the chart.
 	 * @param chartTitle - the title of the chart. 
-	 * @param xAxisLable - x axis label.
+	 * @param xAxisLabel - x axis label.
 	 * @param yAxisLable - y axis label.
 	 * @return a JPanel with a chart on it.
 	 */
 	@SuppressWarnings("deprecation")
-	private static JPanel createChart(XYDataset dataset, String chartTitle, String xAxisLable, String yAxisLable){
+	private static JPanel createChart(XYDataset dataset, String chartTitle, String xAxisLabel, String yAxisLabel){
 		// create the chart...
 		JFreeChart chart = ChartFactory.createXYLineChart(
 				chartTitle,
-				xAxisLable,
+				xAxisLabel,
 				yAxisLable,
 				dataset, 
 				PlotOrientation.VERTICAL,

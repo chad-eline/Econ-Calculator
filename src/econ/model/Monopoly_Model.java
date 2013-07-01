@@ -62,6 +62,8 @@ public class Monopoly_Model extends Model{
 		return demandIntercept - (2 * demandSlope * quantity);
 	}
 	
+	
+	
 	public static void main(String[] args){
 		
 	}
