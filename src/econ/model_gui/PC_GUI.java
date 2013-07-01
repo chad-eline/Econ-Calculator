@@ -172,7 +172,7 @@ public class PC_GUI extends Model_GUI{
 			else{
 				pc_model = new PC_Model(SSlope, SIntercept, DSlope, DIntercept);
 				//add the model to the panel
-				add(createPanel(pc_model.getDataset()), BorderLayout.NORTH);
+				add(createChart(pc_model.getDataset(), pc_model.getModelName(), pc_model.getXAxisName(), pc_model.getYAxisName()), BorderLayout.NORTH);
 				isModelCreated = true;
 			}
 			jtfPrice.setText(Double.toString(pc_model.calcOptimalPrice()));
@@ -192,31 +192,35 @@ public class PC_GUI extends Model_GUI{
 		/*Converts a text field to a usable double and check if the value is blank.*/
 		public double convertInput(JTextField j){
 			//get text from JTF
-			String s = j.getText();	
+			String str = j.getText();	
 
 			//Loop until string is not null
-			while(s == null || s.length() == 0){
-				s = JOptionPane.showInputDialog("Whoops! Looks like you left" + j.getName() + " blank. " +
+			while(str == null || str.length() == 0){
+				str = JOptionPane.showInputDialog("Whoops! Looks like you left" + j.getName() + " blank. " +
 						"Why don't you give that another shot?");
+				
 			}
-			j.setText(s);					//set the text to the new value
-			return Double.parseDouble(s);	//return valid double value
+			j.setText(str);					//set the text to the new value
+			return Double.parseDouble(str);	//return valid double value
 		}
 	}
 
 	/**
 	 * Creates the chart from the data set
-	 * @param dataset the data for the chart.
-	 * @return a chart.
+	 * @param dataset - the data for the chart.
+	 * @param chartTitle - the title of the chart. 
+	 * @param xAxisLable - x axis label.
+	 * @param yAxisLable - y axis label.
+	 * @return a JPanel with a chart on it.
 	 */
 	@SuppressWarnings("deprecation")
-	private static JFreeChart createChart(XYDataset dataset){
+	private static JPanel createChart(XYDataset dataset, String chartTitle, String xAxisLable, String yAxisLable){
 		// create the chart...
 		JFreeChart chart = ChartFactory.createXYLineChart(
-				"Perfect Competition", // chart title
-				"Quantity", // x axis label
-				"Price", // y axis label
-				dataset, // data
+				chartTitle,
+				xAxisLable,
+				yAxisLable,
+				dataset, 
 				PlotOrientation.VERTICAL,
 				true, // include legend
 				true, // tooltips
@@ -234,17 +238,12 @@ public class PC_GUI extends Model_GUI{
 		XYLineAndShapeRenderer renderer	= (XYLineAndShapeRenderer) plot.getRenderer();
 		renderer.setShapesVisible(true);
 		renderer.setShapesFilled(true);
-		//TODO:XYAreaRenderer.;
 
 		// change the auto tick unit selection to integer units only...
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		return chart;
-	}
-
-	//Creates and returns a JPanel with a chart on it 
-	public static JPanel createPanel(XYDataset data) {
-		JFreeChart chart = createChart(data);
+				
 		return new ChartPanel(chart);
 	}
+
 }

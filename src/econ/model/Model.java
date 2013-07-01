@@ -8,6 +8,12 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class Model {
 	
+	//Axis and Chart Names
+	private final String MODEL_TITLE = "Model";
+	private final String X_AXIS_TITLE = "Quantity";
+	private final String Y_AXIS_TITLE = "Price";
+	
+	
 	//	---	COnstructors	---
 	
 	/*Default no arg constructor*/

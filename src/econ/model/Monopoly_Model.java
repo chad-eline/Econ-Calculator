@@ -3,6 +3,11 @@ package econ.model;
 
 public class Monopoly_Model extends Model{
 
+	//Axis and Chart Names
+	private final String MODEL_TITLE = "Monopoly";
+	private final String X_AXIS_TITLE = "Quantity";
+	private final String Y_AXIS_TITLE = "Price";
+	
 	//identify data fields for this model
 	private double profit;
 	private double revenue;

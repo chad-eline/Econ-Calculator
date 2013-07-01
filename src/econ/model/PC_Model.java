@@ -7,6 +7,11 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 public class PC_Model extends Model{
+	
+	//Axis and Chart Names
+	private final String MODEL_TITLE = "Perfect Competition";
+	private final String X_AXIS_TITLE = "Quantity";
+	private final String Y_AXIS_TITLE = "Price";
 
 	//private data fields for price and quantity
 	private double demandSlope;
@@ -213,4 +218,18 @@ public class PC_Model extends Model{
 	public void setOptimal_Quantity(double optimal_Quantity) {
 		this.optimalQuantity = optimal_Quantity;
 	}
+
+	public String getModelName() {
+		return MODEL_TITLE;
+	}
+
+	public String getXAxisName() {
+		return X_AXIS_TITLE;
+	}
+
+	public String getYAxisName() {
+		return Y_AXIS_TITLE;
+	}
+	
+	
 }
