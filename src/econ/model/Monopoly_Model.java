@@ -61,10 +61,10 @@ public class Monopoly_Model extends Model{
 	public double calcMarginalRevenue(double demandIntercept, double demandSlope, double quantity){
 		return demandIntercept - (2 * demandSlope * quantity);
 	}
-	
-	
-	
+		
 	public static void main(String[] args){
+		Monopoly_Model m = new Monopoly_Model();
+		
 		
 	}
 }

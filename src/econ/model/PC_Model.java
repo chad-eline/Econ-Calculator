@@ -116,10 +116,7 @@ public class PC_Model extends Model{
 		return this.supplySeries;
 	}
 	
-	/**createDataSet: Creates a dataset for the supply and demand series for this model object.
-	 * TODO Consideration: perhaps remove this method later as you may want to create an ArrayList of
-	 * PC_Model objects and add all their S & D curves to one data set, instead of trying to manage 
-	 * multiple dataset's on same graph.*/
+	/**createDataSet: Creates a dataset for the supply and demand series for this model object.*/
 	public XYDataset createDataset(){
 		XYSeriesCollection dataset = new XYSeriesCollection();
 

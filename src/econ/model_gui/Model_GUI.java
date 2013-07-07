@@ -6,7 +6,9 @@ package econ.model_gui;
 
 import java.awt.Color;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -19,6 +21,20 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.RectangleInsets;
 
 public class Model_GUI extends JPanel{
+	
+	//----- GUI OUTPUTS COMPONENTS -----
+	private JLabel jlPrice = new JLabel("Equilibrium Price");
+	private JTextField jtfPrice = new JTextField();
+	private JLabel jlQuantity = new JLabel("Equilibrium Quantity");	
+	private JTextField jtfQuantity = new JTextField();
+	private JLabel jlCS = new JLabel("Consumer Surplus");
+	private JTextField jtfCS = new JTextField();
+	private JLabel jlPS = new JLabel("Producer Surplus");
+	private JTextField jtfPS = new JTextField();
+	private JLabel jlW = new JLabel("Welfare");
+	private JTextField jtfW = new JTextField();
+	private JLabel jlDWL = new JLabel("Dead Weight Loss");
+	private JTextField jtfDWL = new JTextField();
 	
 	//Constructors
 	

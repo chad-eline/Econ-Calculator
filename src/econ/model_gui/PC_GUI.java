@@ -4,13 +4,10 @@ package econ.model_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,12 +18,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYAreaRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.general.Dataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleInsets;
 
 import econ.model.PC_Model;
@@ -35,7 +27,6 @@ import econ.model.PC_Model;
 public class PC_GUI extends Model_GUI{
 
 	private PC_Model pc_model;
-	private Dataset dataset;
 
 	/**Keeps track of whether or not the panel has a model on it.
 	 * TODO: implement a better way to do this. Possibly in the action event listener somehow*/
@@ -44,11 +35,12 @@ public class PC_GUI extends Model_GUI{
 	//----- GUI Buttons -----
 	private JButton jbtSolve = new JButton("Solve");
 	
-	/*TODO: Add later
-	private JButton jbtAddDemandSeries = new JButton("+");
-	private JButton jbtAddSupplySeries = new JButton("+");
-	private JButton jbtRemoveDemandSeries = new JButton("-");	
-	private JButton jbtRemoveSupplySeries = new JButton("-");*/
+
+	/**TODO: Add buttons and a new layout manager.
+	 * private JButton jbtAddDemandSeries = new JButton("+");
+	 * private JButton jbtRemoveDemandSeries = new JButton("-");
+	 * private JButton jbtAddSupplySeries = new JButton("+");
+	 * private JButton jbtRemoveSupplySeries = new JButton("-");*/
 	
 	//----- GUI INPUTS COMPONENTS -----
 	private JTextField jtfDemandSlope = new JTextField("");
@@ -172,9 +164,7 @@ public class PC_GUI extends Model_GUI{
 			}
 			else{
 				pc_model = new PC_Model(SSlope, SIntercept, DSlope, DIntercept);
-				//add the model to the panel
-				//TODO: Add createDataset method in this class.
-				add(createChart(pc_model.getDataset(), pc_model.getModelName(), pc_model.getXAxisName(), pc_model.getYAxisName()), BorderLayout.NORTH);
+				add(createChart(pc_model), BorderLayout.NORTH);
 				isModelCreated = true;
 			}
 			jtfPrice.setText(Double.toString(pc_model.calcOptimalPrice()));
@@ -183,9 +173,8 @@ public class PC_GUI extends Model_GUI{
 			jtfPS.setText(Double.toString(pc_model.calcProducerSurplus()));
 			jtfW.setText(Double.toString(pc_model.calcWellfare()));
 			
-//			Uncomment when a second set of curves is added
-//			jtfDWL.setText(Double.toString(pc_model.calcW()));
-//			jtfDWL.setText(Double.toString(pc_model.calcDWL()));
+			//jtfDWL.setText(Double.toString(pc_model.calcW()));
+			//jtfDWL.setText(Double.toString(pc_model.calcDWL()));
 			
 			//validates the panel object
 			validate();
@@ -206,46 +195,31 @@ public class PC_GUI extends Model_GUI{
 			return Double.parseDouble(str);	//return valid double value
 		}
 	}
-
-	//Creates a dataset for 1 model
-	public Dataset createDataSet(PC_Model pc){
-		return null;
-	}
 	
-	//Creates a data set for 2 models
-	public Dataset createDataSet(PC_Model pc1, PC_Model pc2){
-		return null;
-	}
-
-	
-	/**
-	 * Creates the chart from the data set
+	/**Creates the chart from the data set
 	 * @param dataset - the data for the chart.
-	 * @param chartTitle - the title of the chart. 
-	 * @param xAxisLabel - x axis label.
-	 * @param yAxisLable - y axis label.
-	 * @return a JPanel with a chart on it.
-	 */
+	 * @param PC_Model - the data model from which all of the charts attributes are extracted from.
+	 * @return a JPanel with a chart on it.*/
 	@SuppressWarnings("deprecation")
-	private static JPanel createChart(XYDataset dataset, String chartTitle, String xAxisLabel, String yAxisLabel){
+	private static JPanel createChart(PC_Model pc){
 		// create the chart...
 		JFreeChart chart = ChartFactory.createXYLineChart(
-				chartTitle,
-				xAxisLabel,
-				yAxisLable,
-				dataset, 
-				PlotOrientation.VERTICAL,
-				true, // include legend
-				true, // tooltips
-				false // urls
-				);
-		//NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART
-		chart.setBackgroundPaint(Color.white);
+			pc.getModelName(),
+			pc.getXAxisName(),
+			pc.getYAxisName(),
+			pc.createDataset(), 
+			PlotOrientation.VERTICAL,
+			true, // include legend
+			true, // tooltips
+			false // urls
+			);
+
+		chart.setBackgroundPaint(Color.white);		//set background color
 
 		//Get a reference to the plot for further customization
 		XYPlot plot = (XYPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.lightGray);
-		plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));		//HERE
+		plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
 		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinePaint(Color.white);
 		XYLineAndShapeRenderer renderer	= (XYLineAndShapeRenderer) plot.getRenderer();
@@ -257,6 +231,18 @@ public class PC_GUI extends Model_GUI{
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 				
 		return new ChartPanel(chart);
+	}
+
+	
+	@SuppressWarnings("deprecation")
+	private static JPanel createChart(PC_Model pc1, PC_Model pc2){
+		//TO finish later
+		
+		//get datasets from both models
+		//merge the datasets
+		//create the chart
+		//Custimize the chart
+		return null;
 	}
 
 }
