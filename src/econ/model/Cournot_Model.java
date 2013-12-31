@@ -1,6 +1,5 @@
-/** This class represents the cournot market model. It will handle the 
+/** This class represents the Cournot market model. It will handle the 
  * data and calculation for this model.
- * 
 */
 
 package econ.model;
@@ -13,12 +12,11 @@ public class Cournot_Model{
 	private double optimal_Quantity;	
 
 	
-	//Defautl no-arg constructor
+	//Default no-arg constructor
 	public Cournot_Model(){
 	}
-
 	
-	//Defautl no-arg constructor
+	//Default no-arg constructor
 
 	
 	//	*** Methods ***
