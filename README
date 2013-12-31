@@ -1,1 +1,9 @@
-5/22/13
+EV2 - Economic Calculator Version 2
+	
+	The intention of this project is to create a reusable framework for 
+	calculating, displaying, and sharing classical economic models.
+	
+	Currently, I am still building out the classes that represent the data
+	models and some redementary frontends.
+	
+	
